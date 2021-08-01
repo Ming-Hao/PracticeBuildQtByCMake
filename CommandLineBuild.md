@@ -1,7 +1,7 @@
 ## Run Developer Command Prompt for VS 2019
 ---
 Run cmake under the CMakeLists.txt folder
->> cmake -G "Visual Studio 16 2019" -A x64 -S ./ -B build64
+>> cmake -G "Visual Studio 16 2019" -A x64 -S ./ -B build64 -DQTDIR="D:/Qt/5.13.2/msvc2017_64"
 
 Use msbuild to build project
 >> msbuild build64/helloworld.vcxproj (Default Configuration is Debug)

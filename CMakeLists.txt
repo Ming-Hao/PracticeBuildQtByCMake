@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.19.0)
 
 project(helloworld)
 
-list(APPEND CMAKE_PREFIX_PATH "D:/Qt/5.13.2/msvc2017_64")
+list(APPEND CMAKE_PREFIX_PATH "${QTDIR}")
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
