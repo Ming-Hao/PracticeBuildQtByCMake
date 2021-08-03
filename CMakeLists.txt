@@ -11,8 +11,11 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
-include_directories(${Qt5Core_INCLUDES} ${Qt5Widgets_INCLUDES})
 
 set(SOURCES
     test_cmake/mainwindow.cpp
@@ -24,3 +27,7 @@ set(HEADERS
 add_executable(helloworld ${SOURCES} ${HEADERS})
 
 target_link_libraries(helloworld Qt5::Widgets Qt5::Core)
+target_include_directories(helloworld PRIVATE ${Qt5Core_INCLUDES} ${Qt5Widgets_INCLUDES})
+
+add_subdirectory(test_cmake/test_subdir_exe)
+add_subdirectory(test_cmake/test_subdir_dll)
