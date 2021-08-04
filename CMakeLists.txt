@@ -11,10 +11,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 set(SOURCES
@@ -31,3 +27,10 @@ target_include_directories(helloworld PRIVATE ${Qt5Core_INCLUDES} ${Qt5Widgets_I
 
 add_subdirectory(test_cmake/test_subdir_exe)
 add_subdirectory(test_cmake/test_subdir_dll)
+
+install(TARGETS ${PROJECT_NAME}
+        CONFIGURATIONS Debug
+        RUNTIME DESTINATION Debug/bin)
+install(TARGETS ${PROJECT_NAME}
+        CONFIGURATIONS Release
+        RUNTIME DESTINATION Release/bin)
