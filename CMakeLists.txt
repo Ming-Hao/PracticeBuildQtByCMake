@@ -35,3 +35,8 @@ install(TARGETS ${PROJECT_NAME}
 install(TARGETS ${PROJECT_NAME}
         CONFIGURATIONS Release
         RUNTIME DESTINATION Release/bin)
+
+find_program(WINDEPLOYQT_ENV_SETUP qtenv2.bat HINTS "${QTDIR}")
+find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${QTDIR}")
+
+install(CODE "execute_process(COMMAND ${WINDEPLOYQT_ENV_SETUP} && ${WINDEPLOYQT_EXECUTABLE} ${CMAKE_INSTALL_PREFIX}/Release/bin)")
