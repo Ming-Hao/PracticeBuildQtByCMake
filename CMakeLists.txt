@@ -31,6 +31,7 @@ add_subdirectory(test_cmake/test_subdir_dll)
 install(TARGETS ${PROJECT_NAME}
         CONFIGURATIONS Debug
         RUNTIME DESTINATION Debug/bin)
+
 install(TARGETS ${PROJECT_NAME}
         CONFIGURATIONS Release
         RUNTIME DESTINATION Release/bin)
