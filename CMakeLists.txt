@@ -22,6 +22,11 @@ set(HEADERS
 
 add_executable(helloworld ${SOURCES} ${HEADERS})
 
+set_target_properties(
+    helloworld
+    PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
+)
+
 target_link_libraries(helloworld Qt5::Widgets Qt5::Core)
 target_include_directories(helloworld PRIVATE ${Qt5Core_INCLUDES} ${Qt5Widgets_INCLUDES})
 
