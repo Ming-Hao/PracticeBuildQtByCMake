@@ -6,16 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->pushButton, &QAbstractButton::clicked, this, [this](){
+        QMessageBox::about(this, "Hello World!", "CMake for fun");
+    });
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-
-void MainWindow::on_pushButton_clicked()
-{
-    QMessageBox::about(this, "Hello World!", "CMake for fun");
-}
-
