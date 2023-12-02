@@ -30,3 +30,12 @@ Set Environment variable under testing
 
 >> helloworld.exe
 
+## Run Xcode
+---
+cmake -G "Xcode" -S ./ -B build64 -DQTDIR="~/Qt/6.2.4/macos" -DCMAKE_INSTALL_PREFIX="./build64/CMakeInstall"
+
+Build project
+* Use xcodebuild - project
+> xcodebuild -project build64/helloworld.xcodeproj (Default Configuration is Debug)
+~
+> xcodebuild -project build64/helloworld.xcodeproj -configuration Release

@@ -11,7 +11,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 set(SOURCES
     test_cmake/mainwindow.cpp
@@ -22,26 +22,40 @@ set(HEADERS
 
 add_executable(helloworld ${SOURCES} ${HEADERS})
 
-set_target_properties(
-    helloworld
-    PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
+if(WIN32)
+    set_target_properties(
+        helloworld
+        PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
 )
+elseif(APPLE)
+    set_target_properties(helloworld PROPERTIES
+        MACOSX_BUNDLE TRUE
+        MACOSX_FRAMEWORK_IDENTIFIER org.mycompany.helloworld
+)
+endif()
 
-target_link_libraries(helloworld Qt5::Widgets Qt5::Core)
-target_include_directories(helloworld PRIVATE ${Qt5Core_INCLUDES} ${Qt5Widgets_INCLUDES})
+target_link_libraries(helloworld Qt6::Widgets Qt6::Core)
 
 add_subdirectory(test_cmake/test_subdir_exe)
 add_subdirectory(test_cmake/test_subdir_dll)
 
-install(TARGETS ${PROJECT_NAME}
-        CONFIGURATIONS Debug
-        RUNTIME DESTINATION Debug/bin)
+if(WIN32)
+    install(TARGETS ${PROJECT_NAME}
+            CONFIGURATIONS Debug
+            RUNTIME DESTINATION Debug/bin)
 
-install(TARGETS ${PROJECT_NAME}
-        CONFIGURATIONS Release
-        RUNTIME DESTINATION Release/bin)
+    install(TARGETS ${PROJECT_NAME}
+            CONFIGURATIONS Release
+            RUNTIME DESTINATION Release/bin)
+elseif(APPLE)
+    install(TARGETS ${PROJECT_NAME}
+        BUNDLE DESTINATION . 
+        RUNTIME DESTINATION bin)
+endif()
 
 find_program(WINDEPLOYQT_ENV_SETUP qtenv2.bat HINTS "${QTDIR}")
 find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${QTDIR}")
 
-install(CODE "execute_process(COMMAND deploy.bat ${CMAKE_INSTALL_PREFIX}/Release/bin ${WINDEPLOYQT_ENV_SETUP} ${WINDEPLOYQT_EXECUTABLE})")
+if(WIN32)
+    install(CODE "execute_process(COMMAND deploy.bat ${CMAKE_INSTALL_PREFIX}/Release/bin ${WINDEPLOYQT_ENV_SETUP} ${WINDEPLOYQT_EXECUTABLE})")
+endif()
