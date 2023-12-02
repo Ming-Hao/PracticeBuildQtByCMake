@@ -32,7 +32,8 @@ Set Environment variable under testing
 
 ## Run Xcode
 ---
-cmake -G "Xcode" -S ./ -B build64 -DQTDIR="~/Qt/6.2.4/macos" -DCMAKE_INSTALL_PREFIX="./build64/CMakeInstall"
+Run cmake under the CMakeLists.txt folder
+> cmake -G "Xcode" -S ./ -B build64 -DQTDIR="~/Qt/6.2.4/macos" -DCMAKE_INSTALL_PREFIX="./build64/CMakeInstall"
 
 Build project
 * Use xcodebuild - project
